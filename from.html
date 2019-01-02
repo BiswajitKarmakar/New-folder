@@ -1,0 +1,36 @@
+<html>
+<title></title>
+<head></head>
+<body>
+<fieldset style="float: left;width: 300px;background-color: brown; background:url(kumud.jpg) no-repeat;width: 250px;height: 150px;"> 
+<legend>From validation</legend>  
+<from action="tbl1.html" >
+first Name:<input type="text" id="fname"><br>
+<span id="id1"></span><br>
+Second Name:<input type="text" id="sname"><br>
+<span id="id2"></span> <br>
+<input type="button"  value="click" onsubmit="return fun()">
+<script>
+function fun()
+{
+    let s1=document.getElementById("fname").value;
+    if(s1 == "")
+    {
+        document.getElementById("id1").textContent="please fill 1st row";
+        return false;
+    }
+    let s2=document.getElementById("sname").value;
+    if(s2 == "")
+    {
+    document.getElementById("id1").textContent="";
+    document.getElementById("id2").textContent="please fill 2nd row";
+    return false;
+    }
+}
+</script>
+
+</from>
+</fieldset>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Email_validation</title>
+    <style>
+        span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Email Validation</h1>
+    <form action="first.html">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" id="nameId" placeholder="Enter Name.."><br>
+                <span id="nameSpanId"></span>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>Email:</td>
+                <td><input  type="text" id="emailId" placeholder="Enter Email.." onkeyup="emailValidate(this.value)">
+                <br> <span id="emailSpanId"></span>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" id="passwordId" placeholder="Enter password.." onkeyup="pswdValidate(this.value)"><br>
+                <span id="passwordSpanId"></span>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Confirm Password:</td>
+                <td><input type="password" onkeyup="checkCnfPassword()" id="cnfPasswordId" placeholder="Enter Confirm Password.."><br>
+                <span id="cnfPasswordSpanId"></span>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td><input type="radio" name="gender" value="Male">Male&nbsp;
+                    <input type="radio" name="gender" value="Female">Female<br>
+                <span id="genderSpanId"></span>
+                </td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" id="submitId" onclick=" return validate()" value="Submit">
+                </td>
+            </tr>
+
+        </table>
+    </form>
+    <script>
+        //check all the field are fill or not.
+        function validate()
+        {
+            let name=document.getElementById("nameId").value;
+            let email=document.getElementById("emailId").value;
+            let password=document.getElementById("passwordId").value;
+            let cnfPassword=document.getElementById("cnfPasswordId").value;
+            let gender=document.getElementsByName("gender")
+            if(name.trim()==""){
+                document.getElementById("nameSpanId").textContent="Please fill the above field."
+                return false;
+            }else{
+
+                document.getElementById("nameSpanId").textContent="";
+            }
+            
+             if(email.trim()==""){
+                document.getElementById("nameSpanId").textContent=""
+                document.getElementById("emailSpanId").textContent="Please fill the above field."
+                return false;
+            }else if(password.trim()==""){
+                document.getElementById("emailSpanId").textContent=""
+                document.getElementById("passwordSpanId").textContent="Please fill the above field."
+                return false;
+            }else if(cnfPassword.trim()==""){
+                document.getElementById("passwordSpanId").textContent=""
+                document.getElementById("cnfPasswordSpanId").textContent="Please fill the above field."
+                return false;
+            }else if(gender[0].checked==false && gender[1].checked==false){
+                document.getElementById("cnfPasswordSpanId").textContent=""
+                document.getElementById("genderSpanId").textContent="Please fill the above field."
+                return false;
+            }else{
+                return true;
+            }
+        }
+        //email validation using reguler Expression
+        function emailValidate(email){
+            let regEx=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if(email.match(regEx)){
+                document.getElementById("emailSpanId").textContent="";
+
+            }else{
+                document.getElementById("emailSpanId").textContent="invalid email";
+            }
+        }
+        //check password length
+        function pswdValidate(value){
+            let pass=value.trim();
+            if(pass.length<5){
+                document.getElementById("passwordSpanId").style.color="red";
+                document.getElementById("passwordSpanId").textContent="Week password";
+            }else if(pass.length>=5 && pass.length<8){
+                document.getElementById("passwordSpanId").style.color="blue";
+                document.getElementById("passwordSpanId").textContent="Good password";
+            }else if(pass.length>=8 && pass.length<15){
+                document.getElementById("passwordSpanId").style.color="green";
+                document.getElementById("passwordSpanId").textContent="Strong password";
+            }else{
+                document.getElementById("passwordSpanId").textContent="Length should be less than 15";
+
+            }
+        }
+
+        //check both password filed are match or not
+        function checkCnfPassword(){
+            let password=document.getElementById("passwordId").value;
+            let cnfPassword=document.getElementById("cnfPasswordId").value;
+           if(password!=cnfPassword){
+            document.getElementById("cnfPasswordSpanId").textContent="Password doesn't match.";
+           }else{
+            document.getElementById("cnfPasswordSpanId").style.color="green";
+            document.getElementById("cnfPasswordSpanId").textContent="Password match.";
+ 
+           }
+        }
+    </script>
+</body>
+</html>
